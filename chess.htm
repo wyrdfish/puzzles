@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chess</title>
+    <script type="text/javascript">
+        squareSize = 50;
+
+        Xmax = 8;
+        Ymax = 8;
+
+        var maze = new Array(Ymax)
+
+        for (y = 0; y < Ymax; y++)
+        {
+            maze[y] = new Array(Xmax);
+        }
+        
+        for (y = 0; y < Ymax; y++)
+        {
+        		for (x= 0; x< Xmax; x++)
+        		{
+        			maze[x][y]=0;
+        		}
+        }
+        
+        pause(30);
+
+        function pause(milliseconds) {
+            var dt = new Date();
+            while ((new Date()) - dt <= milliseconds) { /* Do nothing */ }
+        }
+
+        function draw() {
+
+            for (x = 0; x < Xmax; x++) {
+                for (y = 0; y < Ymax; y++) {
+
+                    //if (maze[x][y] == 1) {
+                        square(x, y);
+                    //}
+                }
+            }
+        }
+        
+        function carve(x,y)
+        {
+        var randomDirection=Math.floor(Math.random()*4);
+        var been = new Array(4);
+       
+        switch(randomDirection)
+        {
+        case 0 : //N
+        if ( (y > 0) && maze[x][y-1]  )
+       
+       
+        break;
+        }
+       
+        }
+
+        function square(x, y) {
+
+            var canvas = document.getElementById('screen');
+            var style  = "rgb(255,255,255)";
+            var OtherStyle  = "rgb(0,0,0)";
+            if ((x+y) %2 )
+            {
+                style  = "rgb(0,0,0)";
+                OtherStyle  = "rgb(255,255,255)";
+            }
+
+            if (canvas.getContext) {
+                var ctx = canvas.getContext('2d');
+                ctx.fillStyle = style;
+                ctx.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
+                ctx.fillStyle = OtherStyle;
+                ctx.font="40px Georgia";
+                ctx.fillText("A", ((x) * squareSize) + 10, ((y) * squareSize) + 38);
+            }
+        }
+
+    </script>
+    <style type="text/css">
+        canvas
+        {
+          //  border: 1px solid black;
+        }
+    </style>
+</head>
+<body onload="draw();">
+    <canvas id="screen" width="480" height="800">
+    </canvas>
+</body>
+</html>
