@@ -75,7 +75,7 @@
                 ctx.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
                 ctx.fillStyle = OtherStyle;
                 ctx.font="40px Georgia";
-                ctx.fillText("A", ((x) * squareSize) + 10, ((y) * squareSize) + 38);
+                ctx.fillText(String.fromCharCode(65+Math.floor(Math.random() * 26)), ((x) * squareSize) + 10, ((y) * squareSize) + 38);
             }
         }
 
