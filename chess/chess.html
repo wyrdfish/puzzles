@@ -1,7 +1,11 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
     <title>Chess</title>
+    <script src="kingtour.js" type="text/javascript" >
+    </script>
+    <script src="knighttour.js" type="text/javascript" >
+    </script>
     <script src="chess.js" type="text/javascript" >
     </script>
     <style type="text/css">
@@ -17,18 +21,19 @@
     <p>You can select the starting point and then choose king or knight and the text will be flowed into the grid following the movement rules of the piece selected.</p>
     <canvas id="screen" width="400" height="400">
     </canvas>
-    <form>
+    <form id="routeForm">
         <br><br>
         <label for="PuzzleText">Text:</label>
         <input type="text" id="PuzzleText" name="PuzzleText"
             placeholder="Alwaysoldsometimesnewneversadsometimesbluemynameopensalockforyou"
+            value="Alwaysoldsometimesnewneversadsometimesbluemynameopensalockforyou"
             maxlength="64" minlength="64" size="64">
         <br><br>
         <p>Chess piece:</p>
-          <input type="radio" id="king" name="movePattern" value="King" checked="checked">
-          <label for="html">King</label><br>
-          <input type="radio" id="knight" name="movePattern" value="Knight">
-          <label for="css">Knight</label><br>
+         <input type="radio" id="king" name="movePattern" value="King" checked="checked">
+         <label for="king">King</label><br>
+         <input type="radio" id="knight" name="movePattern" value="Knight">
+         <label for="knight">Knight</label><br>
         <br><br>
         <input type="button" value="go" onclick="GoButtonClicked()">
     </form>
