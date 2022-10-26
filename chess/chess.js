@@ -1,6 +1,6 @@
 
 
-var TextToRender="Alwaysoldsometimesnewneversadsometimesbluemynameopensalockforyou"
+var TextToRender="                                                                "
 //Always old sometimes new never sad sometimes blue my name opens a lock for you
 
 //board size

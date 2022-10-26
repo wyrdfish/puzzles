@@ -12,13 +12,23 @@
     </style>
 </head>
 <body onload="RenderBoard();">
+    <h1>Chess Tour</h1>
+    <p>This is a tool that will allow you to enter a 64 character phrase and have it laid out on a chess board.</p>
+    <p>You can select the starting point and then choose king or knight and the text will be flowed into the grid following the movement rules of the piece selected.</p>
     <canvas id="screen" width="400" height="400">
     </canvas>
     <form>
+        <br><br>
         <label for="PuzzleText">Text:</label>
         <input type="text" id="PuzzleText" name="PuzzleText"
             placeholder="Alwaysoldsometimesnewneversadsometimesbluemynameopensalockforyou"
             maxlength="64" minlength="64" size="64">
+        <br><br>
+        <p>Chess piece:</p>
+          <input type="radio" id="king" name="movePattern" value="King" checked="checked">
+          <label for="html">King</label><br>
+          <input type="radio" id="knight" name="movePattern" value="Knight">
+          <label for="css">Knight</label><br>
         <br><br>
         <input type="button" value="go" onclick="GoButtonClicked()">
     </form>
