@@ -7,20 +7,24 @@ var movePattern
 Xmax = 8;
 Ymax = 8;
 
-squareSize = 50; //in pixels
+startX = 0;
+startY = 0;
 
-var Letterboard = new Array(Ymax)
+squareSize = 50; //in pixels
+halfsquareSize = squareSize/2;
+
+var LetterBoard = new Array(Ymax)
 
 for (y = 0; y < Ymax; y++)
 {
-    Letterboard[y] = new Array(Xmax);
+    LetterBoard[y] = new Array(Xmax);
 }
 
 for (y = 0; y < Ymax; y++)
 {
         for (x= 0; x< Xmax; x++)
         {
-            Letterboard[x][y]=" ";
+            LetterBoard[x][y]=" ";
         }
 }
 
@@ -41,12 +45,13 @@ for (y = 0; y < Ymax; y++)
 
 
 function GoButtonClicked() {
-    PuzzleText=document.getElementById("PuzzleText").value;
+    PuzzleText=document.getElementById("PuzzleText").value.toUpperCase();;
     movePattern = document.forms.routeForm.movePattern.value;
 
     PlanRoute(movePattern);
     FillBoard(PuzzleText);
-    RenderBoard();
+    RenderBoard('LetterBoard', LetterBoard);
+    RenderBoard('RouteBoard', RouteBoard);
 }
 
 function PlanRoute(movePattern) {
@@ -69,7 +74,7 @@ function FillBoard(PuzzleText)
         for (x= 0; x< Xmax; x++)
         {
             gridId = x+(y*Xmax);
-            Letterboard[x][y]=PuzzleText[RouteBoard[x][y]];
+            LetterBoard[x][y]=PuzzleText[RouteBoard[x][y]];
         }
     }
 }
@@ -79,19 +84,19 @@ function pause(milliseconds) {
     while ((new Date()) - dt <= milliseconds) { /* Do nothing */ }
 }
 
-function RenderBoard() {
+function RenderBoard(canvas,board) {
 
     for (x = 0; x < Xmax; x++) {
         for (y = 0; y < Ymax; y++) {
-            square(x, y);
+            square(canvas,board,x, y);
         }
     }
 }
 
 
-function square(x, y) {
+function square(canvas,board,x, y) {
 
-    var canvas = document.getElementById('screen');
+    var canvas = document.getElementById(canvas);
     var style  = "rgb(255,255,255)";
     var OtherStyle  = "rgb(0,0,0)";
 
@@ -104,9 +109,11 @@ function square(x, y) {
     if (canvas.getContext) {
         var ctx = canvas.getContext('2d');
         ctx.fillStyle = style;
+        ctx.textAlign = "center";
+        ctx.textBaseline = 'middle'; 
         ctx.fillRect(x * squareSize, y * squareSize, squareSize, squareSize);
         ctx.fillStyle = OtherStyle;
-        ctx.font="40px Georgia";
-        ctx.fillText(Letterboard[x][y], ((x) * squareSize) + 10, ((y) * squareSize) + 38);
+        ctx.font="38px Georgia";
+        ctx.fillText(board[x][y], ((x) * squareSize) + halfsquareSize, ((y) * squareSize) + halfsquareSize);
     }
 }
