@@ -10,8 +10,6 @@ const possibleMoves = [
   ];
 
 
-const isValid = ([x, y]) => RouteBoard[x] && RouteBoard[x][y] === -1;
-
 const getValidMoves = ([x, y]) => {
   const moves = [];
   for (const [moveX, moveY] of possibleMoves) {

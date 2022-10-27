@@ -1,39 +1,39 @@
-const possibleMoves = [
+const possibleKingMoves = [
     [0, 1],
     [1, 0],
     [0, -1],
     [-1, 0]
   ];
 
-  const isValid = ([x, y]) => RouteBoard[x] && RouteBoard[x][y] === -1;
 
-const getValidMoves = ([x, y]) => {
-  const moves = [];
-  for (const [moveX, moveY] of possibleMoves) {
+
+const getValidKingMoves = ([x, y]) => {
+  const KingMoves = [];
+  for (const [moveX, moveY] of possibleKingMoves) {
     const toX = x + moveX;
     const toY = y + moveY;
     if (isValid([toX, toY])) {
-      moves.push([toX, toY]);
+        KingMoves.push([toX, toY]);
     }
   }
-  return moves;
+  return KingMoves;
 };
 
 
-const solve = ([x, y], moveNumber = 0) => {
+const KingSolve = ([x, y], KingMoveNumber = 0) => {
     if (!isValid([x, y])) {
       throw new Error(`The starting position x:${x} and y:${y} is invalid`);
     }
   
-    RouteBoard[x][y] = moveNumber;
-    if (moveNumber + 1 === Xmax * Ymax) {
+    RouteBoard[x][y] = KingMoveNumber;
+    if (KingMoveNumber + 1 === Xmax * Ymax) {
       return true;
     }
-    const sortedMoves = getValidMoves([x, y]).sort(
-      (a, b) => getValidMoves(a).length - getValidMoves(b).length
+    const sortedKingMoves = getValidKingMoves([x, y]).sort(
+      (a, b) => getValidKingMoves(a).length - getValidKingMoves(b).length
     );
-    for (const [toX, toY] of sortedMoves) {
-      if (solve([toX, toY], moveNumber + 1)) {
+    for (const [toX, toY] of sortedKingMoves) {
+      if (KingSolve([toX, toY], KingMoveNumber + 1)) {
         return true;
       }
       RouteBoard[toX][toY] = -1;
@@ -43,7 +43,7 @@ const solve = ([x, y], moveNumber = 0) => {
 
   function PlanKingRoute()
   {
-    solve([startX, startY]);
+    KingSolve([startX, startY]);
   }
 
 function PlanKingRoute2()

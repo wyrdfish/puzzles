@@ -20,14 +20,6 @@ for (y = 0; y < Ymax; y++)
     LetterBoard[y] = new Array(Xmax);
 }
 
-for (y = 0; y < Ymax; y++)
-{
-        for (x= 0; x< Xmax; x++)
-        {
-            LetterBoard[x][y]=" ";
-        }
-}
-
 var RouteBoard = new Array(Ymax)
 
 for (y = 0; y < Ymax; y++)
@@ -35,12 +27,18 @@ for (y = 0; y < Ymax; y++)
     RouteBoard[y] = new Array(Xmax);
 }
 
-for (y = 0; y < Ymax; y++)
+resetBoards();
+
+function resetBoards()
 {
+    for (y = 0; y < Ymax; y++)
+    {
         for (x= 0; x< Xmax; x++)
         {
             RouteBoard[x][y]=-1;
+            LetterBoard[x][y]=" ";
         }
+    }
 }
 
 
@@ -48,11 +46,14 @@ function GoButtonClicked() {
     PuzzleText=document.getElementById("PuzzleText").value.toUpperCase();;
     movePattern = document.forms.routeForm.movePattern.value;
 
+    resetBoards();
     PlanRoute(movePattern);
     FillBoard(PuzzleText);
     RenderBoard('LetterBoard', LetterBoard);
     RenderBoard('RouteBoard', RouteBoard);
 }
+
+const isValid = ([x, y]) => RouteBoard[x] && RouteBoard[x][y] === -1;
 
 function PlanRoute(movePattern) {
     switch (movePattern)
