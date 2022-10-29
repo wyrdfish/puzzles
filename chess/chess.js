@@ -48,6 +48,17 @@ function getMousePosition(c, event) {
     console.log("Coordinate x: " + x,
                 "Coordinate y: " + y);
 
+    
+    highlight_square('LetterBoard', LetterBoard,startX, startY,"black");
+    startX = x; startY=y;
+    highlight_square('LetterBoard', LetterBoard,startX, startY,"green");
+
+}
+
+function showBoards(){
+    RenderBoard('LetterBoard', LetterBoard);
+    highlight_square('LetterBoard', LetterBoard,startX, startY,"green");
+    RenderBoard('RouteBoard', RouteBoard);
 }
 
 function GoButtonClicked() {
@@ -57,8 +68,7 @@ function GoButtonClicked() {
     resetBoards();
     PlanRoute(movePattern);
     FillBoard(PuzzleText);
-    RenderBoard('LetterBoard', LetterBoard);
-    RenderBoard('RouteBoard', RouteBoard);
+    showBoards();
 }
 
 const isValid = ([x, y]) => RouteBoard[x] && RouteBoard[x][y] === -1;
@@ -124,5 +134,17 @@ function square(thecanvas,board,x, y) {
         ctx.fillStyle = OtherStyle;
         ctx.font="38px Georgia";
         ctx.fillText(board[x][y], ((x) * squareSize) + halfsquareSize, ((y) * squareSize) + halfsquareSize);
+    }
+}
+
+function highlight_square(thecanvas,board,x, y,thisStyle) {
+
+    var canvas = document.getElementById(thecanvas);
+
+    if (canvas.getContext) {
+        var ctx = canvas.getContext('2d');
+        ctx.strokeStyle = thisStyle;
+        ctx.lineWidth = 4;
+        ctx.strokeRect(x * squareSize, y * squareSize, squareSize, squareSize);
     }
 }
