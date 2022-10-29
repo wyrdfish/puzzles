@@ -41,6 +41,14 @@ function resetBoards()
     }
 }
 
+function getMousePosition(c, event) {
+    let rect = c.getBoundingClientRect();
+    let x = ~~((event.clientX - rect.left)/squareSize);
+    let y = ~~((event.clientY - rect.top)/squareSize);
+    console.log("Coordinate x: " + x,
+                "Coordinate y: " + y);
+
+}
 
 function GoButtonClicked() {
     PuzzleText=document.getElementById("PuzzleText").value.toUpperCase();;
@@ -85,19 +93,19 @@ function pause(milliseconds) {
     while ((new Date()) - dt <= milliseconds) { /* Do nothing */ }
 }
 
-function RenderBoard(canvas,board) {
+function RenderBoard(thecanvas,board) {
 
     for (x = 0; x < Xmax; x++) {
         for (y = 0; y < Ymax; y++) {
-            square(canvas,board,x, y);
+            square(thecanvas,board,x, y);
         }
     }
 }
 
 
-function square(canvas,board,x, y) {
+function square(thecanvas,board,x, y) {
 
-    var canvas = document.getElementById(canvas);
+    var canvas = document.getElementById(thecanvas);
     var style  = "rgb(255,255,255)";
     var OtherStyle  = "rgb(0,0,0)";
 
